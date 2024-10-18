@@ -4,5 +4,5 @@
 -- Column names must be: origin and nb_fans
 -- Your script can be executed on any database
 
-SELECT origun, SUM(nb_fans) from metal_bands
+SELECT origun, SUM(nb_fans) as nb_fans from metal_bands
 ORDER BY SUM(nb_fans) DESC;
