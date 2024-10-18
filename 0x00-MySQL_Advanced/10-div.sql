@@ -2,9 +2,9 @@
 -- or returns 0 if the second number is equal to 0.
 
 DELIMITER $$
-CREATE FUNCTION SafeDiv(a INT, b INT) RETURNS FLOAT
+CREATE FUNCTION SafeDiv(a INT, b INT) RETURNS FLOAT DETERMINISTIC
 BEGIN
-    IF b == 0 THEN
+    IF b = 0 THEN
         RETURN ;
     ELSE
         RETURN a / b;
