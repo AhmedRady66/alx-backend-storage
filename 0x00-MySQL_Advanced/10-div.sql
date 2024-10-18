@@ -2,7 +2,7 @@
 -- or returns 0 if the second number is equal to 0.
 
 DELIMITER $$
-CREATE FUNCTION SafeDiv(a INT, b INT) RETURNS INT
+CREATE FUNCTION SafeDiv(a INT, b INT) RETURNS FLOAT
 BEGIN
     IF b == 0 THEN
         RETURN ;
