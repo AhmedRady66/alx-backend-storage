@@ -7,7 +7,8 @@ from typing import Union
 
 class Cache:
     """Represents an object for storing data in a Redis data storage"""
-    def __init__(self):
+
+    def __init__(self) -> None:
         """Initialize the Redis client and flush the database"""
         self._redis = redis.Redis()
         self._redis.flushdb()
