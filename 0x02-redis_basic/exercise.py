@@ -13,6 +13,8 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @call_history
+    @count_calls
     def store(self, data: Union[str, int, float, bytes]) -> str:
         """Store the input data in Redis using a randomly generated key"""
         key = str(uuid.uuid4())
