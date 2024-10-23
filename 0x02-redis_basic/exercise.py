@@ -1,8 +1,20 @@
 #!/usr/bin/env python3
 """File to write string to redis"""
+from functools import wraps
 import redis
 import uuid
 from typing import Union, Callable, Optional
+
+
+def count_calls(method: Callable) -> Callable:
+    """Count how many times methods of the Cache class are called"""
+    def wrapper(self, *args, **kwargs):
+        """Return the given method after incrementing its call counter"""
+        if isinstance(self._redis, redis.Redis):
+            self._redis.incr(method.__qualname__)
+        return method(self, *args, **kwargs)
+
+    return wrapper
 
 
 class Cache:
@@ -13,6 +25,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, int, float, bytes]) -> str:
         """Store the input data in Redis using a randomly generated key"""
         key = str(uuid.uuid4())
